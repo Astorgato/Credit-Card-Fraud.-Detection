@@ -1,0 +1,90 @@
+# Credit Card Fraud Detection - Configuración Principal
+
+# Información del Proyecto
+project:
+  name: "Credit Card Fraud Detection"
+  version: "1.0.0"
+  description: "Sistema ML para detección de fraude en tarjetas de crédito"
+
+# Configuración de Datos
+data:
+  dataset_path: "../data/credit_card_fraud_dataset.csv"
+  test_size: 0.2
+  random_state: 42
+  stratify: true
+
+# Preprocesamiento
+preprocessing:
+  scaling_method: "standard"
+  handle_missing: "drop"
+  feature_selection: false
+
+# Modelos de Machine Learning
+models:
+  logistic_regression:
+    max_iter: 1000
+    class_weight: "balanced"
+    solver: "liblinear"
+    random_state: 42
+
+  random_forest:
+    n_estimators: 100
+    max_depth: 10
+    min_samples_split: 10
+    min_samples_leaf: 5
+    class_weight: "balanced"
+    random_state: 42
+
+  gradient_boosting:
+    n_estimators: 100
+    learning_rate: 0.1
+    max_depth: 6
+    random_state: 42
+
+  svm:
+    kernel: "rbf"
+    class_weight: "balanced"
+    probability: true
+    gamma: "scale"
+    random_state: 42
+
+  naive_bayes:
+    var_smoothing: 1e-9
+
+# Evaluación
+evaluation:
+  primary_metric: "f1_score"
+  metrics:
+    - "accuracy"
+    - "precision"
+    - "recall" 
+    - "f1_score"
+    - "roc_auc"
+
+  cross_validation:
+    method: "stratified_kfold"
+    n_splits: 5
+    shuffle: true
+
+# Parámetros de Negocio
+business:
+  avg_fraud_amount: 700.0
+  fp_investigation_cost: 25.0
+  annual_model_cost: 150000.0
+
+# Configuración de Salida
+output:
+  results_dir: "../results/"
+  model_dir: "../models/"
+  log_level: "INFO"
+  save_predictions: true
+  save_probabilities: true
+
+# Configuración de Visualización
+visualization:
+  style: "seaborn-v0_8-darkgrid"
+  figure_size: [12, 8]
+  color_palette: "husl"
+  save_plots: true
+  plot_format: "png"
+  dpi: 300
